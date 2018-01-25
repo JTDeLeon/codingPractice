@@ -1,0 +1,78 @@
+body{
+	margin:0;
+	padding: 0;
+}
+
+header{
+	color:white;
+	background:grey;
+	padding:5px 15px 0px 15px;
+
+}
+
+header h1{
+	margin:0;
+	display: inline;
+
+}
+
+nav ul{
+	margin:0;
+	display: inline;
+	padding:0 0 0 15px;
+}
+
+nav ul li{
+	background: black;
+	display: inline-block;
+	list-style-type: none;
+	padding:5px 15px;
+	
+}
+
+nav ul li a {
+	color:white;
+}
+
+.row:after {
+    clear: both;
+    content: " ";
+    display: table;
+
+}
+
+.col{
+	float:left;
+	background: #333;
+	margin: .5%;
+	width:31%;
+	border-radius: 5px;
+	padding: .5%px;
+}
+
+.bodyContent:after{
+	clear: both;
+	margin:5px;
+}
+
+.bodyText {
+	border:1px solid black;
+	margin:1%;
+	padding:0;
+	width:70%;
+	float:left;
+}
+
+#suggestionBar {
+	width:25%;
+}
+
+
+.title{
+	margin:0;
+	padding:0;
+}
+
+footer{
+	clear: both;
+}
