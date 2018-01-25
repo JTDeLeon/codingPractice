@@ -73,17 +73,22 @@ function reverseArrayInPlace(array){
 
 //List Function Challenge: 
 
-//Create the List when given [1,2,3]
+//Create the List when given an array
 function arrayToList(array){
-//NOTE NEED TO FIND A WAY TO MAKE THIS DYNAMIC	
-	var list = {
-	value:array[0],
-	rest:{
-		value:array[1],
-		rest:{
-			value:array[2],
-			rest:null
-			}
+	var finalValue = array[array.length-1];
+	//Takes away the first index value and sets to newValue
+	var newValue = array.shift();
+
+	if(newValue!=undefined){
+		//Creates List
+		var list = {};
+		//Assigns newValue to object
+		list.value = newValue;
+		//Checks to see if last property will be set to null or use recursion
+		if(newValue == finalValue){
+			list.rest = null;
+		}else{
+			list.rest = arrayToList(array);
 		}
 	}
 	return list;
@@ -94,16 +99,12 @@ function arrayToList(array){
 
 
 //Produces an array from the list
-function listToArray(object){
+function listToArray(list){
 	var newArray = [];
-
-//NOTE NEED TO FIND A WAY TO MAKE THIS DYNAMIC
-	newArray[0] = object.value;
-	
-	newArray[1] = object.rest.value;
-	
-	newArray[2] = object.rest.rest.value;
-
+	//Traverses into the object link
+	for(var node = list; node; node = node.rest){
+		newArray.push(node.value);
+	}
 	return newArray;
 }
 
@@ -115,19 +116,34 @@ function prepend (listObject, element) {
 		rest:listObject
 	}
 	return newList;
+	//return {value:element, rest:listObject};
 
 }
 
 
 // nth : returns the element at the given position in the list, or undefined. 
-function nth(listObject, element){
-	var newArray = listToArray(listObject);
-
-	if(newArray[element] == undefined){
+function nth(list, element){
+	//If the list is empty with no values, then return undefined
+	if(!list)
 		return undefined;
-	}else{
-		return newArray[element];
-	}
+	//If the index is zero, return the current list's value
+	else if(element == 0)
+		return list.value;
+	/*Otherwise we want to move the list pointer forward by recursion with the 
+	next level in the list with element-1 counting down until we reach zero, at that 
+	point is when we will have found our object we want to pull the value from*/
+	else 
+		return nth(list.rest, element-1);
 
 }
+
+
+console.log(arrayToList([10, 20]));
+// → {value: 10, rest: {value: 20, rest: null}}
+console.log(listToArray(arrayToList([10, 20, 30])));
+// → [10, 20, 30]
+console.log(prepend(prepend(null,20),10));
+// → {value: 10, rest: {value: 20, rest: null}}
+console.log(nth(arrayToList([10, 20, 30]), 1));
+// → 20
 
